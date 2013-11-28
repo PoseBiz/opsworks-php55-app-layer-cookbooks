@@ -60,7 +60,7 @@ node[:deploy].each do |app_name, deploy|
     cwd "/var/#{app_name}"
     code <<-EOH
     curl -s https://getcomposer.org/installer | php
-    php composer.phar install --prefer-source --no-interaction --working-dir=portal/
+    php composer.phar install --prefer-source --no-interaction -v --working-dir="/var/#{app_name}/portal/"
     EOH
   end
   
