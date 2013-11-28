@@ -59,7 +59,7 @@ node[:deploy].each do |app_name, deploy|
     user "#{node['phpapp']['deploy']['user']}"
     cwd "/var/#{app_name}"
     code <<-EOH
-    ll
+    ls -l
     curl -s https://getcomposer.org/installer | php
     php composer.phar install --prefer-source --no-interaction -v --working-dir="/var/pose_php/portal/"
     EOH
