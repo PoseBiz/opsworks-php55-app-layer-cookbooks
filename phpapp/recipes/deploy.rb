@@ -58,7 +58,9 @@ node[:deploy].each do |app_name, deploy|
     interpreter "bash"
     user "#{node['phpapp']['deploy']['user']}"
     cwd "/var/#{app_name}"
+    ls #{default[:opsworks_custom_cookbooks][:destination]}
     code <<-EOH
+    ls #{default[:opsworks_custom_cookbooks][:destination]}
     curl -s https://getcomposer.org/installer | php
     php composer.phar install --prefer-source --no-interaction -v
     EOH
