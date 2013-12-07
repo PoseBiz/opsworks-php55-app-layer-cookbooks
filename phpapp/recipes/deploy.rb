@@ -58,11 +58,14 @@ node[:deploy].each do |app_name, deploy|
     interpreter "bash"
     user "#{node['phpapp']['deploy']['user']}"
     cwd "/var/#{app_name}"
-    ls #{default[:opsworks_custom_cookbooks][:destination]}
+    echo "#{default[:opsworks_custom_cookbooks][:destination]}"
+    ls "#{default[:opsworks_custom_cookbooks][:destination]}"
     code <<-EOH
+    echo #{default[:opsworks_custom_cookbooks][:destination]}
     ls #{default[:opsworks_custom_cookbooks][:destination]}
+    ls lib
     curl -s https://getcomposer.org/installer | php
-    php composer.phar install --prefer-source --no-interaction -v
+    php composer.phar install --prefer-source --no-interaction -v --working-dir="./lib"
     EOH
   end
   
